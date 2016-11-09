@@ -2,6 +2,7 @@ var os = require('os');
 var request = require('request');
 var morgan = require('morgan');
 var express = require('express');
+var redis = connectToCache();
 
 var app = express();
 app.use(express.static(__dirname + '/public'));
@@ -14,10 +15,8 @@ app.get('/', function (req, res) {
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-    // Connect to redis container
-    var redis = require('redis').createClient("redis://mycache");
-
     // Increment requestCount each time API is called
+    if (!redis) { redis = connectToCache(); }
     redis.incr('requestCount', function (err, reply) {
         var requestCount = reply;
     });
@@ -48,3 +47,8 @@ process.on("SIGTERM", () => {
     console.log("Terminating...");
     server.close();
 });
+
+function connectToCache() {
+    var redis = require('redis').createClient("redis://mycache");
+    return redis;
+}
