@@ -1,4 +1,4 @@
-# Azure multi-container Docker application sample
+# Sample app for demonstrating continuous integration and deployment of a multi-container Docker app to Azure Container Service
 This repository contains a sample Azure multi-container Docker application.
 
 * service-a: Angular.js sample application with Node.js backend 
