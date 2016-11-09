@@ -20,3 +20,5 @@ services:
 
     mycache:
         image: redis:alpine
+        expose:
+            - "6379"
