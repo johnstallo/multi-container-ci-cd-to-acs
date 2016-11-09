@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
     // Connect to redis container
-    var redis = require('redis').createClient("mycache");
+    var redis = require('redis').createClient("redis://mycache");
 
     // Increment requestCount each time API is called
     // redis.incr('requestCount', function (err, reply) {
