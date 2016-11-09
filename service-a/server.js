@@ -1,12 +1,6 @@
 var os = require('os');
 var request = require('request');
 var morgan = require('morgan');
-if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
-    var appInsights = require('applicationinsights').setup().start();
-    appInsights.client.commonProperties = {
-        "Service name": require("./package.json").name
-    };
-}
 var express = require('express');
 
 var app = express();
@@ -20,13 +14,13 @@ app.get('/', function (req, res) {
 
 // api ------------------------------------------------------------
 app.get('/api', function (req, res) {
-    // Connect to redis container
-    var redis = require('redis').createClient("redis://mycache");
+    // // Connect to redis container
+    // var redis = require('redis').createClient("redis://mycache");
 
-    // Increment requestCount each time API is called
-    redis.incr('requestCount', function (err, reply) {
-        var requestCount = reply;
-    });
+    // // Increment requestCount each time API is called
+    // redis.incr('requestCount', function (err, reply) {
+    //     var requestCount = reply;
+    // });
 
     // Invoke service-b
     request('http://service-b', function (error, response, body) {
@@ -34,12 +28,12 @@ app.get('/api', function (req, res) {
     });
 });
 
-app.get('/metrics', function (req, res) {
-var redis = require('redis').createClient("redis://mycache");
-    redis.get('requestCount', function (err, reply) {
-        res.send({ requestCount: reply });
-    });
-});
+// app.get('/metrics', function (req, res) {
+// var redis = require('redis').createClient("redis://mycache");
+//     redis.get('requestCount', function (err, reply) {
+//         res.send({ requestCount: reply });
+//     });
+// });
 
 var port = 80;
 var server = app.listen(port, function () {
