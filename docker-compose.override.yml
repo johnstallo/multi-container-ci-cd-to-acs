@@ -1,0 +1,6 @@
+version: "2"
+
+services:
+    service-a:
+        ports:
+            - "8080:80"
