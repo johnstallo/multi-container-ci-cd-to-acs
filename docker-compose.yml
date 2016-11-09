@@ -8,17 +8,11 @@ services:
         depends_on:
             - service-b
             - mycache
-        labels:
-            com.microsoft.acs.dcos.marathon.healthcheck.path: '/'
-
+            
     service-b:
         build: ./service-b
         expose:
             - "80"
-        labels:
-            com.microsoft.acs.dcos.marathon.healthcheck.path: '/'
 
     mycache:
         image: redis:alpine
-        labels:
-            com.microsoft.acs.dcos.marathon.healthcheck.path: '/'
