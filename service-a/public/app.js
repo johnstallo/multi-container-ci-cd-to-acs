@@ -8,9 +8,9 @@ app.controller('MainController', function($scope, $http) {
             $scope.messages.push(response.data);
 
             // Make request to /metrics            
-            // $http.get("/metrics?_=" + Date.now()).then(function(response) {
-            //     $scope.metrics = response.data;
-            // });
+            $http.get("/metrics?_=" + Date.now()).then(function(response) {
+                $scope.metrics = response.data;
+            });
         });
     };
     

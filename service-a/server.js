@@ -18,9 +18,9 @@ app.get('/api', function (req, res) {
     var redis = require('redis').createClient("redis://mycache");
 
     // Increment requestCount each time API is called
-    // redis.incr('requestCount', function (err, reply) {
-    //     var requestCount = reply;
-    // });
+    redis.incr('requestCount', function (err, reply) {
+        var requestCount = reply;
+    });
 
     // Invoke service-b
     request('http://service-b', function (error, response, body) {
@@ -28,12 +28,12 @@ app.get('/api', function (req, res) {
     });
 });
 
-// app.get('/metrics', function (req, res) {
-// var redis = require('redis').createClient("redis://mycache");
-//     redis.get('requestCount', function (err, reply) {
-//         res.send({ requestCount: reply });
-//     });
-// });
+app.get('/metrics', function (req, res) {
+var redis = require('redis').createClient("redis://mycache");
+    redis.get('requestCount', function (err, reply) {
+        res.send({ requestCount: reply });
+    });
+});
 
 var port = 80;
 var server = app.listen(port, function () {
