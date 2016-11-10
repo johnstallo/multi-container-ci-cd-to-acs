@@ -28,7 +28,7 @@ app.get('/api', function (req, res) {
 });
 
 app.get('/metrics', function (req, res) {
-var redis = require('redis').createClient("redis://mycache");
+    if (!redis) { redis = connectToCache(); }
     redis.get('requestCount', function (err, reply) {
         res.send({ requestCount: reply });
     });
