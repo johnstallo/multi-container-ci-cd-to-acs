@@ -4,6 +4,9 @@ This repository contains a sample Azure multi-container Docker application.
 * service-a: Angular.js sample application with Node.js backend 
 * service-b: ASP .NET Core sample service
 
+## Deploy to Azure Container Service
+[Follow this tutorial](https://channel9.msdn.com/events/connect/2016/204) to set up continuous integration and deployment of a multi-container Docker application to an Azure Container Service cluster. The tutorial walks through how to use standard Docker assets in your source repository to drive the creation of build and deploy tasks in Visual Studio Team Services, integrate with the new Azure Container Registry, and promote a release across dev/test/production environments without rebuilding container images.
+
 ## Run application locally
 First, compile the ASP .NET Core application code. This uses a container to isolate build dependencies that is also used by VSTS for continuous integration:
 
